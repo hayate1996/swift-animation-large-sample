@@ -96,7 +96,6 @@ class ViewController: UIViewController {
             
             // animationViewのデフォルトサイズ 100x100
             // 100x100 -> 200x200に変化させる
-            self.animationView.frame.size = CGSizeMake(200, 200)
             
             
             // animationViewの位置を維持
