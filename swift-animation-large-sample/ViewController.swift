@@ -99,7 +99,8 @@ class ViewController: UIViewController {
             
             
             // animationViewの位置を維持
-            self.animationView.center = CGPointMake(self.animationAreaView.bounds.size.width / 2, self.animationAreaView.bounds.size.height / 2)
+            self.animationView.center = CGPointMake(self.animationAreaView.bounds.size.width / 2,
+                                                    self.animationAreaView.bounds.size.height / 2)
             
         }){ (isTrue) -> Void in
             // アニメーション終了後に呼び出される
