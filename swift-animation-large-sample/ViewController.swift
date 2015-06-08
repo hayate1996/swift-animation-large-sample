@@ -16,7 +16,7 @@ class ViewController: UIViewController {
     // ビュー
     var rotateButton: UIButton!
     var buttonsAreaView: UIView!
-    var animationAreaView: UIView?
+    var animationAreaView: UIView!
     var animationView: UIView!
     
     // 各ビューのサイズ
@@ -56,7 +56,6 @@ class ViewController: UIViewController {
         }
         else {
             animationAreaView = UIView(frame: CGRectMake(0, 100, animationAreaWidth, animationAreaHeight))
-            
             animationView = makeAnimationView()
             animationAreaView!.addSubview(animationView!)
             
@@ -69,8 +68,8 @@ class ViewController: UIViewController {
     {
         rotateButton = UIButton(frame: CGRectMake(0, 0, buttonWidth, buttonHeight))
         rotateButton.backgroundColor = .lightGrayColor()
-        rotateButton.setTitle("Rotate", forState: .Normal)
-        rotateButton.addTarget(self, action: Selector("rotateAction"), forControlEvents: UIControlEvents.TouchUpInside)
+        rotateButton.setTitle("Large", forState: .Normal)
+        rotateButton.addTarget(self, action: Selector("largeAction"), forControlEvents: UIControlEvents.TouchUpInside)
         rotateButton.center = CGPointMake(self.view.center.x, animationAreaView!.frame.maxY + 50)
         
         view.addSubview(rotateButton)
@@ -91,23 +90,22 @@ class ViewController: UIViewController {
     //------------- アニメーション ------------//
     
     // 回転
-    func rotateAction()
+    func largeAction()
     {
         UIView.animateWithDuration(1.0, animations: { () -> Void in
             
-            // 180度回転するtransformの生成// 180度回転するtransformの生成
-            // * 回転角度(radian)を生成する関数(120度の場合): self.DegreesToRadians(120)
-            // * RotateTransformの生成: CGAffineTransformMakeRotation(radian)
-            var radian      = self.DegreesToRadians(180.0)
-            var transform   = CGAffineTransformMakeRotation(radian)
+            // animationViewのデフォルトサイズ 100x100
+            // 100x100 -> 200x200に変化させる
+            self.animationView.frame.size = CGSizeMake(200, 200)
             
-            // animationViewにtransformを設定
-            self.animationView.transform = transform
             
-            }){ (isTrue) -> Void in
-                
-                // animationViewを初期化
-                self.configureAnimationView()
+            // animationViewの位置を維持
+            self.animationView.center = CGPointMake(self.animationAreaView.bounds.size.width / 2, self.animationAreaView.bounds.size.height / 2)
+            
+        }){ (isTrue) -> Void in
+            // アニメーション終了後に呼び出される
+            // animationViewを初期化 (100x100)
+            self.configureAnimationView()
         }
     }
     
